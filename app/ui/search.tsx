@@ -10,7 +10,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const { replace } = useRouter();
 
   // function handleSearch(term: string) { 
-  // no need for the line right above
+  // no need for the line right above as it causes a hook call warning
   const handleSearch = useDebouncedCallback((term) => {
     console.log(`Searching... ${term}`);
     
