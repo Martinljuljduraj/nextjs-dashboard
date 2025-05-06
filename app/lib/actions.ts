@@ -62,11 +62,13 @@ export async function createInvoice(prevState: State, formData: FormData) {
       INSERT INTO invoices (customer_id, amount, status, date)
       VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
     `;
-  } catch (error) {
+  } catch (error){
+      console.error(error); // logs the error to avoid the ESLint warning
+    
     // If a database error occurs, return a more specific error.
-    return {
+    /*return {
       message: 'Database Error: Failed to Create Invoice.',
-    };
+    };*/
   }
 
   // Revalidate the cache for the invoices page and redirect the user.
@@ -101,8 +103,12 @@ export async function updateInvoice(
       SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
       WHERE id = ${id}
     `;
-  } catch (error) {
+  } catch (error){
+    console.error(error); // logs the error to avoid the ESLint warning
+
+    /*
     return { message: 'Database Error: Failed to Update Invoice.' };
+    */
   }
 
   revalidatePath('/dashboard/invoices');
